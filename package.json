@@ -1,0 +1,27 @@
+{
+	"name": "icon-block-lucide",
+	"version": "1.0.0",
+	"description": "WordPress plugin that adds complete Lucide icon library to The Icon Block",
+	"scripts": {
+		"build": "cd dev/scripts && bash download-icons.sh && npm install --silent && npm run generate",
+		"download": "cd dev/scripts && bash download-icons.sh",
+		"generate": "cd dev/scripts && npm install --silent && npm run generate",
+		"categories": "cd dev/scripts && npm install --silent && npm run list-categories",
+		"validate": "node -c register.js && echo '✅ JavaScript syntax is valid'"
+	},
+	"keywords": [
+		"wordpress",
+		"plugin",
+		"icons",
+		"lucide",
+		"icon-block",
+		"gutenberg"
+	],
+	"author": "",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": ""
+	}
+}
+

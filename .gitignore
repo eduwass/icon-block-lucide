@@ -1,0 +1,7 @@
+# Development - ignore downloaded icons but keep scripts
+dev/icons/
+dev/scripts/node_modules/
+dev/scripts/package-lock.json
+
+# System files
+.DS_Store

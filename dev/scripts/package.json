@@ -1,0 +1,14 @@
+{
+	"name": "icon-block-lucide-dev-scripts",
+	"version": "1.0.0",
+	"description": "Development scripts for generating Icon Block register.js from Lucide icons",
+	"type": "module",
+	"scripts": {
+		"generate": "node generate-register.js",
+		"list-categories": "node list-categories.js"
+	},
+	"dependencies": {
+		"svgo": "^3.3.2"
+	}
+}
+
