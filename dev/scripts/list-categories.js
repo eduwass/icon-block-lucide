@@ -74,3 +74,4 @@ sorted.forEach(([category, stats]) => {
 console.log('\n📈 Total Categories:', categoryStats.size);
 console.log('🎨 Icons with categories:', sorted.reduce((sum, [_, stats]) => sum + stats.total, 0), 'assignments');
 
+

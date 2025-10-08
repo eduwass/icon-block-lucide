@@ -1,5 +1,7 @@
 # Icon Block - Lucide Icons
 
+![Demo Video](demo.mp4)
+
 A WordPress plugin that adds the complete [Lucide](https://lucide.dev) icon library to [The Icon Block](https://wordpress.org/plugins/icon-block/) by Nick Diego.
 
 ## ✨ Features
