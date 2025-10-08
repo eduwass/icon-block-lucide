@@ -130,27 +130,27 @@ function generateRegisterJS(icons, categories) {
 	const iconsJS = icons
 		.map(icon => {
 			const parts = [
-				`\t\t\tname: '${icon.name}'`,
-				`\t\t\ttitle: '${icon.title}'`,
-				`\t\t\ticon: '${icon.icon.replace(/'/g, "\\'")}'`,
+				`\t\t\t\tname: '${icon.name}'`,
+				`\t\t\t\ttitle: '${icon.title}'`,
+				`\t\t\t\ticon: '${icon.icon.replace(/'/g, "\\'")}'`,
 			];
 
 			if (icon.categories.length > 0) {
-				parts.push(`\t\t\tcategories: [${icon.categories.map(c => `'${c}'`).join(', ')}]`);
+				parts.push(`\t\t\t\tcategories: [${icon.categories.map(c => `'lucide-${c}'`).join(', ')}]`);
 			}
 
 			if (icon.keywords.length > 0) {
 				const keywordsStr = icon.keywords.map(k => `'${k.replace(/'/g, "\\'")}'`).join(', ');
-				parts.push(`\t\t\tkeywords: [${keywordsStr}]`);
+				parts.push(`\t\t\t\tkeywords: [${keywordsStr}]`);
 			}
 
-			return `\t\t{\n${parts.join(',\n')}\n\t\t}`;
+			return `\t\t\t{\n${parts.join(',\n')}\n\t\t\t}`;
 		})
 		.join(',\n');
 
 	const categoriesJS = categories
 		.map(cat => {
-			return `\t\t{\n\t\t\tname: '${cat.name}',\n\t\t\ttitle: __('${cat.title}', 'icon-block')\n\t\t}`;
+			return `\t\t\t{\n\t\t\t\tname: 'lucide-${cat.name}',\n\t\t\t\ttitle: __('${cat.title}', 'icon-block-lucide')\n\t\t\t}`;
 		})
 		.join(',\n');
 
@@ -162,30 +162,24 @@ wp.domReady(() => {
 	const { __ } = wp.i18n;
 	const { addFilter } = wp.hooks;
 
-	function addCustomIcons(icons) {
-		const customIcons = [
-${iconsJS}
-		];
-
-		const customIconCategories = [
+	function addLucideIcons(iconLibraries) {
+		// Define our Lucide icon library
+		const lucideLibrary = {
+			name: 'lucide',
+			title: __('Lucide', 'icon-block-lucide'),
+			categories: [
 ${categoriesJS}
-		];
+			],
+			icons: [
+${iconsJS}
+			],
+		};
 
-		return [
-			...customIconCategories.map(cat => ({
-				...cat,
-				name: \`lucide-\${cat.name}\`,
-			})),
-			...icons,
-		].concat(
-			customIcons.map(icon => ({
-				...icon,
-				categories: icon.categories?.map(cat => \`lucide-\${cat}\`) || [],
-			}))
-		);
+		// Add our library to the existing libraries
+		return [ ...iconLibraries, lucideLibrary ];
 	}
 
-	addFilter('iconBlock.icons', 'icon-block-lucide/custom-icons', addCustomIcons);
+	addFilter('iconBlock.icons', 'icon-block-lucide/add-lucide-library', addLucideIcons);
 });
 `;
 }
@@ -233,4 +227,3 @@ try {
 	console.error('❌ Error generating register.js:', error);
 	process.exit(1);
 }
-

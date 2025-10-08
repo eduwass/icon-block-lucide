@@ -122,10 +122,16 @@ The generator script (`dev/scripts/generate-register.js`):
 
 ### 3. WordPress Integration
 The generated code:
-- Registers with The Icon Block using WordPress hooks
+- Creates an icon library object matching The Icon Block's v2.0+ structure
+- Registers via the `iconBlock.icons` filter hook
+- Each library contains:
+  - `name`: Library identifier ('lucide')
+  - `title`: Display name ('Lucide')
+  - `categories`: Array of category objects (prefixed with 'lucide-')
+  - `icons`: Array of icon objects with metadata
 - Prefixes categories with `lucide-` to avoid conflicts
 - Makes icons searchable by keywords
-- Supports all Icon Block features (sizing, colors, etc.)
+- Supports all Icon Block features (sizing, colors, rotation, etc.)
 
 ## 📊 Generated Output Stats
 
