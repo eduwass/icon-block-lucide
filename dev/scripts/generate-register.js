@@ -144,6 +144,9 @@ function generateRegisterJS(icons, categories) {
 				parts.push(`\t\t\t\tkeywords: [${keywordsStr}]`);
 			}
 
+			// Lucide icons use stroke, not fill
+			parts.push(`\t\t\t\thasNoIconFill: true`);
+
 			return `\t\t\t{\n${parts.join(',\n')}\n\t\t\t}`;
 		})
 		.join(',\n');
@@ -165,7 +168,7 @@ wp.domReady(() => {
 	function addLucideIcons(iconLibraries) {
 		// Define our Lucide icon library
 		const lucideLibrary = {
-			name: 'lucide',
+			type: 'lucide',
 			title: __('Lucide', 'icon-block-lucide'),
 			categories: [
 ${categoriesJS}
