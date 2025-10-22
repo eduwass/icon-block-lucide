@@ -82,9 +82,11 @@ npm run validate
 
 This plugin also includes a PHP version of the icon registry for use outside the WordPress block editor (e.g., in custom dashboard forms, ACF fields, or templates).
 
+> **⚠️ Note**: The PHP file is **not auto-loaded** to avoid ~1-2 MB memory overhead on every page load. Require it only where needed.
+
 **Quick Start:**
 ```php
-// Include the PHP registry
+// Load the icon registry (only in files where you need it)
 require_once WP_CONTENT_DIR . '/plugins/icon-block-lucide/lucide-icons.php';
 
 // Render an icon
@@ -96,6 +98,8 @@ foreach ($icons['icons'] as $icon) {
     echo "<option value='{$icon['name']}'>{$icon['title']}</option>";
 }
 ```
+
+**Standalone Use**: The `lucide-icons.php` file works independently - you can copy it to any PHP project without WordPress!
 
 **Available Functions:**
 - `get_lucide_icons()` - Get all 2010 icons with metadata

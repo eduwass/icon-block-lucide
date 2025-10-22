@@ -1,14 +1,27 @@
 {
-	"name": "icon-block-lucide-dev-scripts",
+	"name": "icon-block-lucide",
 	"version": "1.0.0",
-	"description": "Development scripts for generating Icon Block register.js from Lucide icons",
-	"type": "module",
+	"description": "WordPress plugin that adds complete Lucide icon library to The Icon Block",
 	"scripts": {
-		"generate": "node generate-register.js",
-		"generate-php": "node generate-php-registry.js",
-		"list-categories": "node list-categories.js"
+		"build": "cd dev/scripts && bash download-icons.sh && npm install --silent && npm run generate",
+		"download": "cd dev/scripts && bash download-icons.sh",
+		"generate": "cd dev/scripts && npm install --silent && npm run generate",
+		"categories": "cd dev/scripts && npm install --silent && npm run list-categories",
+		"validate": "node -c register.js && echo '✅ JavaScript syntax is valid'"
 	},
-	"dependencies": {
-		"svgo": "^3.3.2"
+	"keywords": [
+		"wordpress",
+		"plugin",
+		"icons",
+		"lucide",
+		"icon-block",
+		"gutenberg"
+	],
+	"author": "",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": ""
 	}
 }
+

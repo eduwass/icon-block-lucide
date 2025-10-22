@@ -3,12 +3,16 @@
 ## 🚀 Quick Start
 
 ```php
-// Include the file
+// Load the icon registry (only where you need it to avoid memory overhead)
 require_once WP_CONTENT_DIR . '/plugins/icon-block-lucide/lucide-icons.php';
 
 // Render an icon
 echo render_lucide_icon('alarm-clock-check', 'w-6 h-6 text-blue-500');
 ```
+
+> **💡 Tip**: The PHP file is **not auto-loaded** to avoid ~1-2 MB memory overhead on every page. Only require it in files where you actually use icons (e.g., dashboard forms, admin pages).
+
+> **📦 Standalone Use**: If you just need the icons and not the WordPress block integration, you can copy `lucide-icons.php` to your project - it works standalone!
 
 ## 📦 Available Functions
 
@@ -66,16 +70,17 @@ npm run generate-php
 
 - **Icons**: 2010
 - **Categories**: 48
-- **File Size**: 1.05 MB
-- **Memory**: ~8 MB
-- **Lookup Speed**: ~0.0006 ms
+- **File Size**: 1.05 MB (on disk)
+- **Memory Impact**: 
+  - ~1-2 MB when file is loaded (parsed code)
+  - ~8 MB additional when `get_lucide_icons()` is called (icon data)
+- **Lookup Speed**: ~0.0006 ms per icon
+
+> **Performance Tip**: Only `require_once` this file in pages/forms where you actually need icons. Don't load it globally to avoid unnecessary memory usage on every page load.
 
 ## 📚 Full Documentation
 
-- **USAGE.md** - Comprehensive guide with examples
-- **README-PHP.md** - Overview and development workflow
-- **IMPLEMENTATION-SUMMARY.md** - Technical details
-- **example-icon-picker.php** - Working icon picker component
+See [README.md](README.md) for complete plugin documentation including installation, development commands, and WordPress block integration.
 
 ## 🎨 Categories
 
