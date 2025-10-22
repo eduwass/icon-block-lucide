@@ -12,6 +12,7 @@ A WordPress plugin that adds the complete [Lucide](https://lucide.dev) icon libr
 - **Optimized SVGs** for performance using SVGO
 - **Auto-generated** from official Lucide repositories with proper escaping
 - **Fully integrated** with Icon Block's category and search system
+- **PHP support** for use in custom forms and templates (see [php-usage.md](php-usage.md))
 
 ## 📦 Installation
 
@@ -77,14 +78,50 @@ npm run categories
 npm run validate
 ```
 
+## 🐘 PHP Support
+
+This plugin also includes a PHP version of the icon registry for use outside the WordPress block editor (e.g., in custom dashboard forms, ACF fields, or templates).
+
+**Quick Start:**
+```php
+// Include the PHP registry
+require_once WP_CONTENT_DIR . '/plugins/icon-block-lucide/lucide-icons.php';
+
+// Render an icon
+echo render_lucide_icon('alarm-clock-check', 'w-6 h-6 text-blue-500');
+
+// Get all icons for a dropdown
+$icons = get_lucide_icons();
+foreach ($icons['icons'] as $icon) {
+    echo "<option value='{$icon['name']}'>{$icon['title']}</option>";
+}
+```
+
+**Available Functions:**
+- `get_lucide_icons()` - Get all 2010 icons with metadata
+- `get_lucide_icon($name)` - Get a specific icon
+- `render_lucide_icon($name, $class, $size)` - Render SVG with custom styling
+- `get_lucide_icons_by_category($category)` - Filter icons by category
+- `search_lucide_icons($query)` - Search icons by name/keywords
+
+**Generate PHP Registry:**
+```bash
+cd dev/scripts
+npm run generate-php
+```
+
+📖 **Full PHP documentation:** See [php-usage.md](php-usage.md) for complete usage guide and examples.
+
 ## 📁 Project Structure
 
 ```
 wp-content/plugins/icon-block-lucide/
 ├── README.md                  # This file
+├── php-usage.md               # PHP usage guide
 ├── package.json               # Main build scripts
 ├── icon-block-lucide.php      # WordPress plugin file
-├── register.js                # Generated: 2,010 icons (14,000+ lines)
+├── register.js                # Generated: 2,010 icons for blocks (14,000+ lines)
+├── lucide-icons.php           # Generated: 2,010 icons for PHP (1.05 MB)
 ├── .gitignore                 # Ignores dev/ folder
 │
 ├── dev/                       # Development folder (git-ignored)
@@ -93,7 +130,8 @@ wp-content/plugins/icon-block-lucide/
 │   │   └── lucide-lab/      # 373 experimental icons
 │   └── scripts/              # Build scripts
 │       ├── download-icons.sh
-│       ├── generate-register.js
+│       ├── generate-register.js      # Generates register.js
+│       ├── generate-php-registry.js  # Generates lucide-icons.php
 │       ├── list-categories.js
 │       └── package.json
 │
